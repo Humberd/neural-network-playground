@@ -16,4 +16,3 @@ biases = [
 
 outputs = np.dot(inputs, np.array(weights).T) + biases
 print(outputs)
-print(np.dot(inputs, np.array(weights).T))
