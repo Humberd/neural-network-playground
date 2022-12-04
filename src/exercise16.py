@@ -11,26 +11,29 @@ y = f(x)
 
 plt.plot(x, y)
 
-p2_delta = 0.0001
+for i in range(5):
+    p2_delta = 0.0001
+    x1 = i
+    x2 = x1 + p2_delta
 
-x1 = 2
-x2 = x1 + p2_delta
+    y1 = f(x1)
+    y2 = f(x2)
 
-y1 = f(x1)
-y2 = f(x2)
-
-approximate_derivative = (y2 - y1) / (x2 - x1)
-b = y2 - approximate_derivative * x2
-print(b)
-
-
-def tangent_line(x):
-    return approximate_derivative * x + b
+    approximate_derivative = (y2 - y1) / (x2 - x1)
+    # y = mx+b
+    b = y2 - approximate_derivative * x2
+    print(b)
 
 
-to_plot = [x1 - 0.9, x1, x1 + 0.9]
-plt.plot(to_plot, [tangent_line(i) for i in to_plot])
+    def tangent_line(x):
+        # y = mx+b
+        return approximate_derivative * x + b
 
-print('Approximate derivative for f(x)', f'where x = {x1} is {approximate_derivative}')
+
+    to_plot = [x1 - 0.9, x1, x1 + 0.9]
+    plt.scatter(x1, y1)
+    plt.plot(to_plot, [tangent_line(i) for i in to_plot])
+
+    print('Approximate derivative for f(x)', f'where x = {x1} is {approximate_derivative}')
 
 plt.show()
