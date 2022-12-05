@@ -8,7 +8,7 @@ dvalues = np.array([[1., 1., 1.]]) # (1,3)
 # We have 3 sets of weights - one set for each neuron
 # we have 4 inputs, thus 4 weights
 # recall that we keep weights transposed
-#                     x0,  x1,  x2, x3
+#                     w0,  w1,  w2, w3
 weights = np.array([[0.2, 0.8, -0.5, 1], # (3, 4)
                     [0.5, -0.91, 0.26, -0.5],
                     [-0.26, -0.27, 0.17, 0.87]]).T # (4, 3)
