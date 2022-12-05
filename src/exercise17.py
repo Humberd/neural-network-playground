@@ -16,7 +16,7 @@ z = xw0 + xw1 + xw2 + b
 # ReLU activation function
 y = max(z, 0)
 
-print('loss:', y)
+print('output:', y)
 
 ## derivating
 
@@ -74,4 +74,4 @@ xw2 = x[2] * w[2]
 z = xw0 + xw1 + xw2 + b
 # ReLU activation function
 y = max(z, 0)
-print('loss:', y)
+print('output:', y)
