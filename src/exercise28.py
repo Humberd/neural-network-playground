@@ -175,6 +175,7 @@ print('loss:', loss)
 predictions = np.argmax(loss_activation.output, axis=1)
 if len(y.shape) == 2:
     y = np.argmax(y, axis=1)
+# Here we compare If the index of the result matches target index
 accuracy = np.mean(predictions==y)
 # Print accuracy
 print('acc:', accuracy)
