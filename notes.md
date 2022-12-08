@@ -8,6 +8,9 @@ Then it means that network is sure it's only 60% Cat.
 So the loss is `-log(0.4)=0.398`,
 Where `0.4` is the sum of all other predictions
 
+We want Loss to be LOW(0)
+
+
 ## Accuracy
 
 When the network has 3 output nodes indicating Cat, Dog, Bird
@@ -18,3 +21,4 @@ Then it means in 3 cases the network predicted the output incorrectly
 And in 2 cases it was correct
 So the accuracy is `2/5`
 
+We want Accuracy to be HIGH(1).
