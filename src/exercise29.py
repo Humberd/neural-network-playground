@@ -166,7 +166,7 @@ loss_activation = Activation_Softmax_Loss_CategoricalCrossentropy()
 optimizer = Optimizer_SGD()
 
 # Train in loop
-for epoch in range(100001):
+for epoch in range(10001):
     # Perform a forward pass of our training data through this layer
     dense1.forward(X)
     # Perform a forward pass through activation function
