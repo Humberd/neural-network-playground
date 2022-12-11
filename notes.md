@@ -43,3 +43,11 @@ pick the best set at the end. The reasoning here is that the fewer neurons you h
 you have that the model is memorizing the data.
 
 The process of trying different model settings is called **hyperparameter searching**
+
+
+## Dropout
+
+When we have a 30% dropout it means that during training phase
+about 30% of nodes will output 0, which means that the output value
+will be 30% smaller than normally.
+To fix this we need to scale the output back up 30%
