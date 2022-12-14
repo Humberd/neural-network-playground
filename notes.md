@@ -51,3 +51,29 @@ When we have a 30% dropout it means that during training phase
 about 30% of nodes will output 0, which means that the output value
 will be 30% smaller than normally.
 To fix this we need to scale the output back up 30%
+
+## Preparing a dataset
+
+### Balance a dataset
+
+Make sure a dataset is **balanced**.
+Number of samples from each class should be similar.
+If they are not we should get rid of the ones that exceed the minimal amount
+
+### Grayscale
+
+Convert RGB to grayscale
+
+### Scale the data
+
+Make sure the pixel values are from `0 to 1` or `-1 to 1` range.
+If they are in 0-255 we can do `(value - 127.5) / 127.5` to convert to `-1 to 1` range.
+Use the same scale value to both training and testing dataset.
+
+### Flatten pixel images
+
+Make sure to convert 2D array of image pixels to 1D array.
+
+### Shuffle data
+
+Make sure to shuffle both dataset and target class values.

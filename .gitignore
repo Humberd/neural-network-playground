@@ -1,2 +1,4 @@
 .idea
 *.iml
+fashion_mnist_images.zip
+src/fashion_mnist_images/*
