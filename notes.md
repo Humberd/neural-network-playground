@@ -77,3 +77,8 @@ Make sure to convert 2D array of image pixels to 1D array.
 ### Shuffle data
 
 Make sure to shuffle both dataset and target class values.
+
+### Batch size
+
+Batch size is usually between 32 and 128 samples.
+Each batch of samples is called a **step**.
