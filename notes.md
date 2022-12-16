@@ -1,4 +1,22 @@
 
+## Hyperparameters
+
+### Regularization (:334)
+
+L1 and L2 regularizations are numbers
+added to the loss value to penalize the model for large weight and biases.
+Large wights and biases might indicate that model is attempting to memorize
+training data.
+It's better for many neurons to contribute to the output
+
+L1 - (rarely used) linear approach
+L2 - non-linear approach
+
+* weight_regularizer_l1 - penalizes smaller weights more
+* weight_regularizer_l2 - penalizes bigger weights more
+* bias_regularizer_l1 - penalizes smaller biases more
+* bias_regularizer_l1 - penalizes bigger biases more
+
 ## Loss
 
 When the network has 3 output nodes indicating Cat, Dog, Bird

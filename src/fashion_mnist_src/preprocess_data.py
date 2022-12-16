@@ -61,7 +61,7 @@ model.add(Activation_Softmax())
 # Set loss, optimizer and accuracy objects
 model.set(
     loss=Loss_CategoricalCrossentropy(),
-    optimizer=Optimizer_Adam(decay=5e-5),
+    optimizer=Optimizer_Adam(decay=1e-5),
     accuracy=Accuracy_Categorical()
 )
 
