@@ -1,4 +1,5 @@
 import copy
+import os.path
 
 import numpy as np
 import nnfs
@@ -1055,6 +1056,9 @@ class Model:
             pickle.dump(self.get_parameters(), f)
 
     def load_parameters(self, path):
+        exists = os.path.exists(path)
+        if not exists:
+            return
         with open(path, 'rb') as f:
             self.set_parameters(pickle.load(f))
 
