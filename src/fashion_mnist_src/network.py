@@ -1,5 +1,6 @@
 import numpy as np
 import nnfs
+import pickle
 
 nnfs.init()
 
@@ -19,6 +20,13 @@ class Layer_Dense:
         self.weight_regularizer_l2 = weight_regularizer_l2
         self.bias_regularizer_l1 = bias_regularizer_l1
         self.bias_regularizer_l2 = bias_regularizer_l2
+
+    def get_parameters(self):
+        return self.weights, self.biases
+
+    def set_parameters(self, weights, biases):
+        self.weights = weights
+        self.biases = biases
 
     # Forward pass
     def forward(self, inputs, training):
@@ -747,10 +755,15 @@ class Model:
         self.layers.append(layer)
 
     # Set loss, optimizer and accuracy
-    def set(self, *, loss, optimizer, accuracy):
-        self.loss = loss
-        self.optimizer = optimizer
-        self.accuracy = accuracy
+    def set(self, *, loss=None, optimizer=None, accuracy=None):
+        if loss is not None:
+            self.loss = loss
+
+        if optimizer is not None:
+            self.optimizer = optimizer
+
+        if accuracy is not None:
+            self.accuracy = accuracy
 
     # Finalize the model
     def finalize(self):
@@ -795,9 +808,10 @@ class Model:
                 self.trainable_layers.append(self.layers[i])
 
         # Update loss object with trainable layers
-        self.loss.remember_trainable_layers(
-            self.trainable_layers
-        )
+        if self.loss is not None:
+            self.loss.remember_trainable_layers(
+                self.trainable_layers
+            )
 
         # If output activation is Softmax and
         # loss function is Categorical Cross-Entropy
@@ -1011,3 +1025,25 @@ class Model:
         print(f'validation, ' +
               f'acc: {validation_accuracy:.3f}, ' +
               f'loss: {validation_loss:.3f}')
+
+    def get_parameters(self):
+        parameters = []
+
+        for layer in self.trainable_layers:
+            parameters.append(layer.get_parameters())
+
+        return parameters
+
+    def set_parameters(self, parameters):
+        for parameter_set, layer in zip(parameters,self.trainable_layers):
+            layer.set_parameters(*parameter_set)
+
+    def save_parameters(self, path):
+        # Open a file in the binary-write mode
+        # and save parameters to it
+        with open(path, 'wb') as f:
+            pickle.dump(self.get_parameters(), f)
+
+    def load_parameters(self, path):
+        with open(path, 'rb') as f:
+            self.set_parameters(pickle.load(f))
