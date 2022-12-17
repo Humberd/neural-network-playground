@@ -47,30 +47,35 @@ np.random.shuffle(keys)
 X = X[keys]
 y = y[keys]
 
-# Instantiate the model
-model = Model()
+# # Instantiate the model
+# model = Model()
+#
+# # Add layers
+# model.add(Layer_Dense(X.shape[1], 128))
+# model.add(Activation_ReLU())
+# model.add(Layer_Dense(128, 128))
+# model.add(Activation_ReLU())
+# model.add(Layer_Dense(128, 10))
+# model.add(Activation_Softmax())
+#
+# # Set loss, optimizer and accuracy objects
+# model.set(
+#     loss=Loss_CategoricalCrossentropy(),
+#     optimizer=Optimizer_Adam(decay=1e-4),
+#     accuracy=Accuracy_Categorical()
+# )
+#
+# model.finalize()
+#
+# # Set model with parameters instead of training it
+# model.load_parameters('./fashion_mnist.parms')
+#
+# model.train(X, y, validation_data=(X_test, y_test),
+#             epochs=10, batch_size=128, print_every=100)
+#
+# model.save_parameters('./fashion_mnist.parms')
+# model.save('./fashion_mnist.model')
 
-# Add layers
-model.add(Layer_Dense(X.shape[1], 128))
-model.add(Activation_ReLU())
-model.add(Layer_Dense(128, 128))
-model.add(Activation_ReLU())
-model.add(Layer_Dense(128, 10))
-model.add(Activation_Softmax())
+model = Model.load('./fashion_mnist.model')
 
-# Set loss, optimizer and accuracy objects
-model.set(
-    loss=Loss_CategoricalCrossentropy(),
-    optimizer=Optimizer_Adam(decay=1e-4),
-    accuracy=Accuracy_Categorical()
-)
-
-model.finalize()
-
-# Set model with parameters instead of training it
-model.load_parameters('./fashion_mnist.parms')
-
-model.train(X, y, validation_data=(X_test, y_test),
-            epochs=10, batch_size=128, print_every=100)
-
-model.save_parameters('./fashion_mnist.parms')
+model.evaluate(X_test, y_test)

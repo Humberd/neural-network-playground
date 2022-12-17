@@ -1,6 +1,9 @@
+import copy
+
 import numpy as np
 import nnfs
 import pickle
+import copy
 
 nnfs.init()
 
@@ -750,6 +753,13 @@ class Model:
         # Softmax classifier's output object
         self.softmax_classifier_output = None
 
+    @staticmethod
+    def load(path):
+        with open(path, 'rb') as f:
+            model = pickle.load(f)
+
+        return model
+
     # Add objects to the model
     def add(self, layer):
         self.layers.append(layer)
@@ -1047,3 +1057,24 @@ class Model:
     def load_parameters(self, path):
         with open(path, 'rb') as f:
             self.set_parameters(pickle.load(f))
+
+    def save(self, path):
+        model = copy.deepcopy(self)
+        # Reset accumulated values in loss and accuracy objects
+        model.loss.new_pass()
+        model.accuracy.new_pass()
+
+        # Remove data from input layer
+        # Remove data from input layer
+        # and gradients from the loss object
+        model.input_layer.__dict__.pop('output', None)
+        model.loss.__dict__.pop('dinputs', None)
+
+        # For each layer remove inputs, output and dinputs properties
+        for layer in model.layers:
+            for property in ['inputs', 'output', 'dinputs',
+                             'dweights', 'dbiases']:
+                layer.__dict__.pop(property, None)
+
+        with open(path, 'wb') as f:
+            pickle.dump(model, f)
