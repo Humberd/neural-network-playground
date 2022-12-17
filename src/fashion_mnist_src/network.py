@@ -1000,7 +1000,7 @@ class Model:
             # data, but not a full batch, this won't include it
             # Add `1` to include this not full batch
             if validation_steps * batch_size < len(X_val):
-                validation_steps +=1
+                validation_steps += 1
 
         # Reset accumulated values in loss
         # and accuracy objects
@@ -1045,7 +1045,7 @@ class Model:
         return parameters
 
     def set_parameters(self, parameters):
-        for parameter_set, layer in zip(parameters,self.trainable_layers):
+        for parameter_set, layer in zip(parameters, self.trainable_layers):
             layer.set_parameters(*parameter_set)
 
     def save_parameters(self, path):
@@ -1078,3 +1078,33 @@ class Model:
 
         with open(path, 'wb') as f:
             pickle.dump(model, f)
+
+    def predict(self, X, *, batch_size=None):
+        # Default value if batch size is not being set
+        prediction_steps = 1
+        # Calculate number of steps
+        if batch_size is not None:
+            prediction_steps = len(X) // batch_size
+            # Dividing rounds down. If there are some remaining
+            # data, but not a full batch, this won't include it
+            # Add `1` to include this not full batch
+            if prediction_steps * batch_size < len(X):
+                prediction_steps += 1
+
+        output = []
+
+        for step in range(prediction_steps):
+            if batch_size is None:
+                batch_X = X
+            # Otherwise slice a batch
+            else:
+                batch_X = X[step * batch_size: (step + 1) * batch_size]
+
+            # Perform the forward pass
+            batch_output = self.forward(batch_X, training=False)
+
+            # Append batch prediction to the list of predictions
+            output.append(batch_output)
+
+        # Stack and return results
+        return np.vstack(output)
