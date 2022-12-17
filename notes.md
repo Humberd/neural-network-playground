@@ -12,10 +12,10 @@ It's better for many neurons to contribute to the output
 L1 - (rarely used) linear approach
 L2 - non-linear approach
 
-* weight_regularizer_l1 - penalizes smaller weights more
-* weight_regularizer_l2 - penalizes bigger weights more
-* bias_regularizer_l1 - penalizes smaller biases more
-* bias_regularizer_l1 - penalizes bigger biases more
+* weight_regularizer_l1 (default: 0, e.g 5e-4) - the bigger the value, the more it penalizes smaller weights more
+* weight_regularizer_l2 (default: 0, e.g 5e-4) - the bigger the value, the more it penalizes bigger weights more
+* bias_regularizer_l1 (default: 0, e.g 5e-4) - the bigger the value, the more it penalizes smaller biases more
+* bias_regularizer_l2 (default: 0, e.g 5e-4) - the bigger the value, the more it penalizes bigger biases more
 
 ## Loss
 
@@ -100,3 +100,9 @@ Make sure to shuffle both dataset and target class values.
 
 Batch size is usually between 32 and 128 samples.
 Each batch of samples is called a **step**.
+
+
+## Evaluation
+
+Running evaluation on the training data at the end of the training process will return the
+final accuracy and loss.
